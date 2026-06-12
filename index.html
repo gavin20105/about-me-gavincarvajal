@@ -8,6 +8,9 @@
     <p>Hello, world!</p>
 
     <button id="colorButton">Change Color</button>
+    <button id="factButton">Tell Me a Fact</button>
+
+    <p id="factDisplay"></p>
 
     <script>
       console.log("Hello from JavaScript!");
@@ -17,6 +20,25 @@
 
       button.addEventListener("click", function () {
         heading.style.color = "navy";
+      });
+
+      // 1. An array of facts (placeholders — swap in your real ones!)
+      const facts = [
+        "Fun fact #1 — replace me!",
+        "Fun fact #2 — replace me!",
+        "Fun fact #3 — replace me!",
+        "Fun fact #4 — replace me!",
+        "Fun fact #5 — replace me!",
+      ];
+
+      const factButton = document.querySelector("#factButton");
+      const factDisplay = document.querySelector("#factDisplay");
+
+      factButton.addEventListener("click", function () {
+        // 2. Pick a random position in the array
+        const randomIndex = Math.floor(Math.random() * facts.length);
+        // 3. Put that fact onto the page
+        factDisplay.textContent = facts[randomIndex];
       });
     </script>
   </body>
