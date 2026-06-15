@@ -1,19 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gavin Carvajal — Home</title>
+    <title>Gavin Carvajal</title>
   </head>
   <body>
-    <nav>
-      <a href="index.html">Home</a> |
-      <a href="projects.html">Projects</a> |
-      <a href="contact.html">Contact</a>
-    </nav>
+    <h1 style="color: navy;">Gavin Carvajal</h1>
 
-    <h1>Welcome</h1>
+    <img src="profile.png" alt="Photo of Gavin Carvajal" style="width: 250px; height: auto;" />
 
-    <p>Hi, I'm Gavin Carvajal. This is my portfolio.</p>
+    <p>My name is Gavin Carvajal and I go to Allen Academy, a private school in Bryan, TX. At my school I play basketball, golf, and track, basketball being my favorite. Allen Academy has brought many great coaches and teachers into my life that have helped through school, athletics, and life. I've gone to Allen Academy since I was in 2nd grade and I plan to stay till I graduate high school.</p>
+    <p>In my free time, I spend my time either playing golf, swimming at the Miramont pool, or doing any projects around the house that need to be completed. Playing golf is a new hobby that I recently picked up only a year ago. Before golf I mostly played basketball, soccer, and ran cross country until I found my love for golf. My school has either been state runner up or won state for golf in the past 4 years so golf is a very serious sport at Allen Academy.</p>
+    <p>Another thing I love to do is travel, and my family usually takes two trips every year. Some of my favorite places that we have been to are the Bahamas and Costa Rica. Being able to go to the beach and enjoy the waves by surfing is my idea of a perfect time. Another place my family loves to travel to is either Disney World or Disneyland, but it has become a routine almost as we go every year. By far out of all these places the Bahamas was definitely my favorite place I've been to.</p>
+
+    <p>A couple of my favorite sites:</p>
+    <ul>
+      <li><a href="https://www.espn.com" target="_blank">ESPN</a></li>
+      <li><a href="https://www.hollisterco.com/shop/us" target="_blank">Hollister</a></li>
+    </ul>
+
+    <button id="colorButton">Change Color</button>
+    <button id="factButton">Tell Me a Fact</button>
+    <button id="countButton">Clicked 0 times</button>
+
+    <p id="factDisplay"></p>
+
+    <script>
+      console.log("Hello from JavaScript!");
+
+      const button = document.querySelector("#colorButton");
+      const heading = document.querySelector("h1");
+
+      button.addEventListener("click", function () {
+        // Toggle between navy and crimson each click
+        if (heading.style.color === "navy") {
+          heading.style.color = "crimson";
+        } else {
+          heading.style.color = "navy";
+        }
+      });
+
+      // 1. An array of facts (placeholders — swap in your real ones!)
+      const facts = [
+        "I'm pretty decent at basketball.",
+        "My favorite place to travel to is the Bahamas.",
+        "My favorite food is lasagna.",
+        "I go to Allen Academy.",
+        "I've lived in four different cities.",
+      ];
+
+      const factButton = document.querySelector("#factButton");
+      const factDisplay = document.querySelector("#factDisplay");
+
+      factButton.addEventListener("click", function () {
+        // 2. Pick a random position in the array
+        const randomIndex = Math.floor(Math.random() * facts.length);
+        // 3. Put that fact onto the page
+        factDisplay.textContent = facts[randomIndex];
+      });
+
+      // This variable lives OUTSIDE the click function, so it survives between clicks.
+      let count = 0;
+      const countButton = document.querySelector("#countButton");
+
+      countButton.addEventListener("click", function () {
+        count = count + 1; // add 1 to the running total
+        countButton.textContent = "Clicked " + count + " times";
+      });
+    </script>
   </body>
 </html>
