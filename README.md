@@ -18,9 +18,10 @@ Claude (Anthropic's AI assistant) collaborated with me on this: it helped write 
 page and walked me through setting up Git and publishing the repository to GitHub.
 Final decisions and content are my own.
 
-## Data source
+## Data sources
 
-The home-page chart uses athletes' jersey numbers (`data.json`), compiled from publicly available sources.
+- **Random dog photos** ("Get Something" button) come from the free [Dog CEO Dog API](https://dog.ceo/dog-api/), which requires no API key. The images originate from the [Stanford Dogs Dataset](http://vision.stanford.edu/aditya86/ImageNetDogs/). The API does not require attribution, but credit is given here with thanks.
+- **The home-page chart** uses athletes' jersey numbers (`data.json`), compiled from publicly available sources.
 
 ## License
 
