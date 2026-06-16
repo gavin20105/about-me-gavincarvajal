@@ -18,6 +18,10 @@ Claude (Anthropic's AI assistant) collaborated with me on this: it helped write 
 page and walked me through setting up Git and publishing the repository to GitHub.
 Final decisions and content are my own.
 
+## Data source
+
+The home-page chart uses athletes' jersey numbers (`data.json`), compiled from publicly available sources.
+
 ## License
 
 Released under the [MIT License](LICENSE).
