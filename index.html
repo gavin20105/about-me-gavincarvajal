@@ -32,6 +32,9 @@
 
     <p id="factDisplay"></p>
 
+    <button id="getButton">Get Something</button>
+    <img id="dogImage" alt="A random dog" style="display: block; max-width: 300px; margin-top: 12px;" />
+
     <h2 style="color: navy;">My Favorite Athletes</h2>
     <div style="max-width: 400px;">
       <canvas id="athleteChart"></canvas>
@@ -79,6 +82,18 @@
         count = count + 1; // add 1 to the running total
         countButton.textContent = "Clicked " + count + " times";
       });
+
+      // ===== Get Something button: fetch a random dog photo =====
+      const getButton = document.querySelector("#getButton");
+      const dogImage = document.querySelector("#dogImage");
+
+      async function getSomething() {
+        const response = await fetch("https://dog.ceo/api/breeds/image/random");
+        const data = await response.json();
+        dogImage.src = data.message;
+      }
+
+      getButton.addEventListener("click", getSomething);
 
       // ===== Favorite athletes chart =====
       // Data is inlined here so the chart works even when you open this
