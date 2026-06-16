@@ -3,6 +3,7 @@
   <head>
     <title>Gavin Carvajal</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   </head>
   <body>
     <nav>
@@ -30,6 +31,9 @@
     <button id="countButton">Clicked 0 times</button>
 
     <p id="factDisplay"></p>
+
+    <h2 style="color: navy;">My Favorite Athletes</h2>
+    <canvas id="athleteChart" width="600" height="400"></canvas>
 
     <script>
       console.log("Hello from JavaScript!");
@@ -72,6 +76,34 @@
       countButton.addEventListener("click", function () {
         count = count + 1; // add 1 to the running total
         countButton.textContent = "Clicked " + count + " times";
+      });
+
+      // ===== Favorite athletes chart =====
+      // Data is inlined here so the chart works even when you open this
+      // file directly (double-click). It mirrors data.json.
+      const athletes = [
+        { name: "LeBron James", number: 23 },
+        { name: "Stephen Curry", number: 30 },
+        { name: "Patrick Mahomes", number: 15 },
+        { name: "Lionel Messi", number: 10 },
+        { name: "Tom Brady", number: 12 },
+        { name: "Michael Jordan", number: 23 },
+        { name: "Kobe Bryant", number: 24 },
+        { name: "Shohei Ohtani", number: 17 },
+        { name: "Cristiano Ronaldo", number: 7 },
+        { name: "Kevin Durant", number: 35 },
+      ];
+
+      new Chart(document.querySelector("#athleteChart"), {
+        type: "bar",
+        data: {
+          labels: athletes.map(function (a) { return a.name; }),
+          datasets: [{
+            label: "Jersey Number",
+            data: athletes.map(function (a) { return a.number; }),
+            backgroundColor: "navy",
+          }],
+        },
       });
     </script>
   </body>
