@@ -20,20 +20,37 @@
     fetch("data.json")
       .then(function (response) { return response.json(); })
       .then(function (athletes) {
-        // 2. Split the array into labels (names) and values (numbers).
-        var labels = athletes.map(function (a) { return a.name; });
-        var values = athletes.map(function (a) { return a.number; });
+        // 2. Split the array of objects into two parallel arrays.
+        //    .map() walks the array and returns one value per item.
+        var labels = athletes.map(function (a) { return a.name; });   // ["LeBron James", ...]
+        var values = athletes.map(function (a) { return a.number; }); // [23, 30, ...]
 
         // 3. Find the canvas and draw the chart on it.
         var canvas = document.getElementById("myChart");
         new Chart(canvas, {
+          // type: which kind of chart to draw.
           type: "bar",
+
+          // data: WHAT to draw.
           data: {
-            labels: labels,
+            labels: labels, // x-axis category names
             datasets: [{
-              label: "Jersey Number",
-              data: values
+              label: "Jersey Number", // dataset name (shown in legend + tooltips)
+              data: values,           // the bar heights, one per label
+              backgroundColor: "navy"
             }]
+          },
+
+          // options: HOW it looks and behaves.
+          options: {
+            responsive: true, // resize the chart when its container resizes
+            plugins: {
+              title: { display: true, text: "Favorite Athletes by Jersey Number" },
+              legend: { display: true } // the "Jersey Number" key at the top
+            },
+            scales: {
+              y: { beginAtZero: true } // start the y-axis at 0, not the lowest value
+            }
           }
         });
       });
