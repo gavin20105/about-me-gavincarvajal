@@ -1,0 +1,12 @@
+[
+  { "name": "LeBron James", "number": 23 },
+  { "name": "Stephen Curry", "number": 30 },
+  { "name": "Patrick Mahomes", "number": 15 },
+  { "name": "Lionel Messi", "number": 10 },
+  { "name": "Tom Brady", "number": 12 },
+  { "name": "Michael Jordan", "number": 23 },
+  { "name": "Kobe Bryant", "number": 24 },
+  { "name": "Shohei Ohtani", "number": 17 },
+  { "name": "Cristiano Ronaldo", "number": 7 },
+  { "name": "Kevin Durant", "number": 35 }
+]
