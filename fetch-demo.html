@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fetch Demo — data.json to the console</title>
+</head>
+<body>
+  <h1>Fetch Demo</h1>
+  <p>Open your browser's DevTools and look at the Console tab to see the data.</p>
+
+  <script>
+    // ============================================================
+    // VERSION 1 — .then()
+    // fetch() hands back a "promise" (a value that arrives later).
+    // .then() says "once it arrives, run this function."
+    // We need two .then()s: one to turn the response into JSON,
+    // and one to actually use that JSON.
+    // ============================================================
+    fetch("data.json")
+      .then(function (response) {
+        return response.json(); // parse the text into a real array
+      })
+      .then(function (data) {
+        console.log(".then() version — data.json:", data);
+      });
+
+    // ============================================================
+    // VERSION 2 — async / await
+    // Same steps, but "await" lets us write each step on its own
+    // line as if it happened immediately. Must live inside an
+    // "async" function.
+    // ============================================================
+    async function loadData() {
+      const response = await fetch("data.json");
+      const data = await response.json();
+      console.log("async/await version — data.json:", data);
+    }
+    loadData();
+  </script>
+</body>
+</html>
