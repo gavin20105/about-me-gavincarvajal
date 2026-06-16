@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Favorite Athletes — Chart</title>
+
+  <!-- Load Chart.js from a CDN. This must come BEFORE our own script below,
+       so the global `Chart` exists when we use it. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+  <h1>Favorite Athletes by Jersey Number</h1>
+
+  <!-- Chart.js draws onto this canvas. Nothing else goes inside it. -->
+  <canvas id="myChart" width="600" height="400"></canvas>
+
+  <script>
+    // 1. Load the data file you already made.
+    fetch("data.json")
+      .then(function (response) { return response.json(); })
+      .then(function (athletes) {
+        // 2. Split the array into labels (names) and values (numbers).
+        var labels = athletes.map(function (a) { return a.name; });
+        var values = athletes.map(function (a) { return a.number; });
+
+        // 3. Find the canvas and draw the chart on it.
+        var canvas = document.getElementById("myChart");
+        new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [{
+              label: "Jersey Number",
+              data: values
+            }]
+          }
+        });
+      });
+  </script>
+</body>
+</html>
