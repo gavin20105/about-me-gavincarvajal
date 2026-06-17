@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gavin Carvajal — My GOAT</title>
+    <meta name="description" content="Stephen Curry, the greatest shooter of all time — a dashboard of his 3-pointers made per season, built by Gavin Carvajal." />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="goat.html">My GOAT</a>
+    </nav>
+
+    <h1 style="color: navy;">My GOAT — Stephen Curry</h1>
+
+    <p style="max-width: 700px;">
+      Stephen Curry is the greatest shooter the game of basketball has ever
+      seen. The chart below tracks the heart of his game: how many three-pointers
+      he's made each season.
+    </p>
+
+    <h2 style="color: navy;">Stephen Curry — 3-Pointers Made Per Season</h2>
+
+    <label for="seasonFilter">Show: </label>
+    <select id="seasonFilter">
+      <option value="all">All seasons</option>
+      <option value="5">Last 5</option>
+      <option value="3">Last 3</option>
+    </select>
+
+    <div style="max-width: 700px;">
+      <canvas id="curryChart"></canvas>
+    </div>
+
+    <p style="max-width: 700px;">
+      The navy line shows how many three-pointers Steph Curry made each season,
+      and the gold bars give those numbers context by showing how many games he
+      played. The two move together at the extremes &mdash; his 2019-20 season
+      craters on both because he played only 5 games &mdash; so a low total often
+      reflects missed games, not lost form. (They don't track perfectly, though:
+      in 2015-16 and 2016-17 he played the same 79 games but made 402 versus 324.)
+      That 402 in 2015-16 was an NBA record and stands out as a peak he hasn't
+      matched since. But across his healthy seasons he's stayed at a high,
+      consistent level &mdash; including 357 makes in 2023-24 &mdash; so the chart
+      shows durable, elite production rather than a steady decline.
+    </p>
+
+    <!-- ===== Stephen Curry 3-pointers dashboard =====
+         Loads data.csv, parses it, and draws a combo chart (navy line =
+         3-pointers made, gold bars = games played) with a season filter. -->
+    <script>
+      fetch("data.csv")
+        .then(function (response) { return response.text(); })
+        .then(function (csvText) {
+          // Parse the CSV text into an array of row-objects.
+          var lines = csvText.trim().split("\n");
+          var headers = lines[0].split(",");
+          var rows = [];
+          for (var i = 1; i < lines.length; i++) {
+            var cells = lines[i].split(",");
+            var obj = {};
+            for (var j = 0; j < headers.length; j++) {
+              obj[headers[j]] = cells[j];
+            }
+            rows.push(obj);
+          }
+
+          // Build the combo chart ONCE (line + bars on two y-axes).
+          var curryChart = new Chart(document.getElementById("curryChart"), {
+            type: "bar", // base type; the makes dataset overrides to "line"
+            data: {
+              labels: [],
+              datasets: [
+                {
+                  type: "line",
+                  label: "3-Pointers Made",
+                  data: [],
+                  borderColor: "navy",
+                  backgroundColor: "navy",
+                  tension: 0.2,
+                  yAxisID: "yMakes",
+                  order: 0
+                },
+                {
+                  type: "bar",
+                  label: "Games Played",
+                  data: [],
+                  backgroundColor: "rgba(255, 165, 0, 0.35)",
+                  yAxisID: "yGames",
+                  order: 1
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                title: {
+                  display: true,
+                  text: "Stephen Curry — 3-Pointers Made & Games Played Per Season"
+                },
+                legend: { display: true }
+              },
+              scales: {
+                yMakes: {
+                  type: "linear",
+                  position: "left",
+                  beginAtZero: true,
+                  title: { display: true, text: "3-Pointers Made" }
+                },
+                yGames: {
+                  type: "linear",
+                  position: "right",
+                  beginAtZero: true,
+                  max: 82,
+                  title: { display: true, text: "Games Played" },
+                  grid: { drawOnChartArea: false }
+                }
+              }
+            }
+          });
+
+          // Filter: show all / last 5 / last 3 seasons, and redraw on change.
+          var dropdown = document.getElementById("seasonFilter");
+
+          function applyCurryFilter() {
+            var choice = dropdown.value;
+            var subset = (choice === "all") ? rows : rows.slice(-Number(choice));
+            curryChart.data.labels = subset.map(function (row) { return row.season; });
+            curryChart.data.datasets[0].data = subset.map(function (row) { return Number(row.threes_made); });
+            curryChart.data.datasets[1].data = subset.map(function (row) { return Number(row.games_played); });
+            curryChart.update();
+          }
+
+          applyCurryFilter();
+          dropdown.addEventListener("change", applyCurryFilter);
+        });
+    </script>
+  </body>
+</html>
