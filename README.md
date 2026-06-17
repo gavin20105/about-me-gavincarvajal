@@ -1,6 +1,12 @@
 # About Me
 
-A simple personal "About Me" web page.
+A personal "About Me" website built by Gavin Carvajal while learning web development — featuring a multi-page layout, an interactive chart, and a live dog-photo API button.
+
+**🔗 Live site:** <https://about-me-gavincarvajal.vercel.app>
+
+<!-- Add a screenshot once you have one:
+![Screenshot of the About Me home page](screenshot.png)
+-->
 
 ## Features
 
