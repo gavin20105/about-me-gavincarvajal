@@ -4,9 +4,7 @@ A personal "About Me" website built by Gavin Carvajal while learning web develop
 
 **🔗 Live site:** <https://about-me-gavincarvajal.vercel.app>
 
-<!-- Add a screenshot once you have one:
 ![Screenshot of the About Me home page](screenshot.png)
--->
 
 ## Features
 
