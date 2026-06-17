@@ -7,6 +7,37 @@
     <meta name="description" content="Stephen Curry, the greatest shooter of all time — a dashboard of his 3-pointers made per season, built by Gavin Carvajal." />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+    <!-- Page-specific styling. Lives here (not in styles.css) so the Curry
+         background only shows on THIS page, not Home/Projects/Contact. -->
+    <style>
+      body {
+        background-image: url("curry.jpg"); /* the photo we downloaded */
+        background-size: cover;             /* fill the screen, no tiling */
+        background-position: center;        /* keep him centered */
+        background-attachment: fixed;       /* photo stays put while you scroll */
+      }
+
+      /* A semi-transparent white panel so text/chart stay readable over the photo. */
+      .content {
+        background-color: rgba(255, 255, 255, 0.85); /* white, 85% opaque */
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 760px;
+        margin: 20px auto;                  /* center it, with breathing room */
+      }
+
+      /* Small photo credit (required by the image's CC BY-SA 4.0 license). */
+      .credit {
+        max-width: 760px;
+        margin: 0 auto 20px auto;
+        font-family: sans-serif;
+        font-size: 12px;
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); /* keep it readable on the photo */
+      }
+      .credit a { color: #fff; }
+    </style>
   </head>
   <body>
     <nav>
@@ -16,38 +47,46 @@
       <a href="goat.html">My GOAT</a>
     </nav>
 
-    <h1 style="color: navy;">My GOAT — Stephen Curry</h1>
+    <div class="content">
+      <h1 style="color: navy;">My GOAT — Stephen Curry</h1>
 
-    <p style="max-width: 700px;">
-      Stephen Curry is the greatest shooter the game of basketball has ever
-      seen. The chart below tracks the heart of his game: how many three-pointers
-      he's made each season.
-    </p>
+      <p style="max-width: 700px;">
+        Stephen Curry is the greatest shooter the game of basketball has ever
+        seen. The chart below tracks the heart of his game: how many three-pointers
+        he's made each season.
+      </p>
 
-    <h2 style="color: navy;">Stephen Curry — 3-Pointers Made Per Season</h2>
+      <h2 style="color: navy;">Stephen Curry — 3-Pointers Made Per Season</h2>
 
-    <label for="seasonFilter">Show: </label>
-    <select id="seasonFilter">
-      <option value="all">All seasons</option>
-      <option value="5">Last 5</option>
-      <option value="3">Last 3</option>
-    </select>
+      <label for="seasonFilter">Show: </label>
+      <select id="seasonFilter">
+        <option value="all">All seasons</option>
+        <option value="5">Last 5</option>
+        <option value="3">Last 3</option>
+      </select>
 
-    <div style="max-width: 700px;">
-      <canvas id="curryChart"></canvas>
+      <div style="max-width: 700px;">
+        <canvas id="curryChart"></canvas>
+      </div>
+
+      <p style="max-width: 700px;">
+        The navy line shows how many three-pointers Steph Curry made each season,
+        and the gold bars give those numbers context by showing how many games he
+        played. The two move together at the extremes &mdash; his 2019-20 season
+        craters on both because he played only 5 games &mdash; so a low total often
+        reflects missed games, not lost form. (They don't track perfectly, though:
+        in 2015-16 and 2016-17 he played the same 79 games but made 402 versus 324.)
+        That 402 in 2015-16 was an NBA record and stands out as a peak he hasn't
+        matched since. But across his healthy seasons he's stayed at a high,
+        consistent level &mdash; including 357 makes in 2023-24 &mdash; so the chart
+        shows durable, elite production rather than a steady decline.
+      </p>
     </div>
 
-    <p style="max-width: 700px;">
-      The navy line shows how many three-pointers Steph Curry made each season,
-      and the gold bars give those numbers context by showing how many games he
-      played. The two move together at the extremes &mdash; his 2019-20 season
-      craters on both because he played only 5 games &mdash; so a low total often
-      reflects missed games, not lost form. (They don't track perfectly, though:
-      in 2015-16 and 2016-17 he played the same 79 games but made 402 versus 324.)
-      That 402 in 2015-16 was an NBA record and stands out as a peak he hasn't
-      matched since. But across his healthy seasons he's stayed at a high,
-      consistent level &mdash; including 357 makes in 2023-24 &mdash; so the chart
-      shows durable, elite production rather than a steady decline.
+    <!-- Photo credit — required by the CC BY-SA 4.0 license on the background image. -->
+    <p class="credit">
+      Background photo: "Stephen Curry Shooting" by Cyrus Saatsaz, licensed under
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
     </p>
 
     <!-- ===== Stephen Curry 3-pointers dashboard =====
